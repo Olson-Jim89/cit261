@@ -108,15 +108,21 @@
                }
 
            }
-            
+           
+           var globalCar = new car("Ford","Focus","1995","Red");
+
             function Methods(){
-            var redCar = new car("Ford","Focus","1995","Red");
-            redCar.isOn = true;
+            
+            globalCar.isOn = true;
 
-            document.getElementById('output4').innerHTML += redCar.carMake + "<br>" + redCar.carModel + "<br>" + redCar.carYear + "<br>" + redCar.carColor + "<br><br>";
-            document.getElementById('output4').innerHTML += redCar.dashboard;
+            document.getElementById('output4').innerHTML += globalCar.carMake + "<br>" + globalCar.carModel + "<br>" + globalCar.carYear + "<br>" + globalCar.carColor + "<br><br>";
+            
 
 
+           }
+
+           function showdash(){
+                document.getElementById('outputDash').innerHTML = globalCar.dashboard;
            }
 
            function instatation(){
@@ -177,14 +183,14 @@
         <ul>
             <li>
                 <div><h5>Objects methods</h5>
-                    <div><div id="output4"></div></div>
+                    <div><div id="output4"></div><div id="outputDash"></div></div>
                     <button onclick="Methods()">Start</button>
-                    <button onclick="redCar.changeGearUp();">Change gear UP</button>
-                    <button onclick="redCar.changeGearDown();">Change Gear Down</button>
-                    <button onclick="redCar.acellerate();">Gas</button>
-                    <button onclick="redCar.break();">break</button>
-                    <button onclick="redCar.steerLeft();">Left</button>
-                    <button onclick="redCar.steerRight();">Right</button>
+                    <button onclick="globalCar.changeGearUp();showdash();">Change gear UP</button>
+                    <button onclick="globalCar.changeGearDown();showdash();">Change Gear Down</button>
+                    <button onclick="globalCar.acellerate();showdash();">Gas</button>
+                    <button onclick="globalCar.break();showdash();">break</button>
+                    <button onclick="globalCar.steerLeft();showdash();">Left</button>
+                    <button onclick="globalCar.steerRight();showdash();">Right</button>
                 </div>
             </li>
         </ul>
