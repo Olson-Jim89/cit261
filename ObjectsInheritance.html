@@ -1,0 +1,206 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <script>
+           function car(make, model, year, color) {
+               this.carMake =  make;
+               this.carModel =  model;
+               this.carYear =  year;
+               this.carColor =  color;
+               this.isOn = false;
+               this.gears = ["p","R","D","1","2","3"];
+               this.inGear = this.gears[0];
+               this.speed =  0;
+               this.direction =  0;
+               this.dashboard = "test";
+               this.turnkey = function(){
+                    if (!this.isOn)
+                        this.isOn = true;
+                    else if (this.isOn)
+                        this.isOn = false;
+
+                this.UpdateDashBoard();
+               },
+               this.changeGearUp = function(){
+                   if ( this.speed == 0){
+                        var x = this.gears.indexOf(this.inGear);
+                        
+                        if(x < this.gears.length-1)
+                            x++;
+
+                       this.inGear = this.gears[x];
+                   }
+                   this.UpdateDashBoard();
+               },
+               this.changeGearDown = function(){
+                   if ( this.speed == 0){
+                    var x = this.gears.indexOf(this.inGear);
+                        
+                        if(x < this.gears.length-1)
+                            x--;
+
+                       this.inGear = this.gears[x];
+
+                   }
+                   this.UpdateDashBoard();
+               },
+               this.acellerate = function(){
+                   this.speed++;
+                   this.UpdateDashBoard();
+               },
+               this.break = function(){
+                   if(this.speed > 0)
+                        this.speed--;
+
+                    this.UpdateDashBoard();
+                   
+               },
+               this.steerLeft = function(){
+                   this.direction--;
+                   this.UpdateDashBoard();
+               },
+               this.steerRight = function(){
+                this.direction++;
+                this.UpdateDashBoard();
+               },
+               this.UpdateDashBoard = function(){
+                  this.dashboard = "Is the car on: " + this.isOn +"<br>" + "What gear is it in: " + this.inGear +"<br>"+ "Speed: " + this.speed +"<br>"+ this.direction;
+               }
+           }
+           
+           function CreateObject(){
+               var redCar = Object.create(car);
+
+                redCar.carMake = "Ford";
+                redCar.carModel = "Focus";
+                redCar.carYear = "1998";
+                redCar.carColor = "Red";
+
+                //car.carMake = "Cheverolet";
+                //car.carModel = "Town & Country Minivan";
+               // car.carYear = "2003";
+               // car.carColor = "Purple";
+
+               document.getElementById('output1').innerHTML = redCar.carMake + "<br>" + redCar.carModel + "<br>" + redCar.carYear + "<br>" + redCar.carColor + "<br>";
+           }
+           
+           function CreateObjectThatInherits(){
+            var redCar = new car("Ford","Focus","1995","Red");
+
+            var blueCar = redCar;
+
+            blueCar.carColor="Blue";
+
+            document.getElementById('output2').innerHTML = blueCar.carMake + "<br>" + blueCar.carModel + "<br>" + blueCar.carYear + "<br>" + blueCar.carColor + "<br>";
+           }
+
+           function Properties(colorChange){
+               var myCar = new car("Ford","F150","2016","Green");
+
+               for (var x in myCar){
+                   document.getElementById("output3").innerHTML += myCar[x] + "<br>";
+               }
+               
+               myCar.carColor = "Yellow";
+               
+               for (var x in myCar){
+                   document.getElementById("output3").innerHTML += myCar[x] + "<br>";
+               }
+
+           }
+            
+            function Methods(){
+            var redCar = new car("Ford","Focus","1995","Red");
+            redCar.isOn = true;
+
+            document.getElementById('output4').innerHTML += redCar.carMake + "<br>" + redCar.carModel + "<br>" + redCar.carYear + "<br>" + redCar.carColor + "<br><br>";
+            document.getElementById('output4').innerHTML += redCar.dashboard;
+
+
+           }
+
+           function instatation(){
+               myCar = new car();
+
+               myCar.color = "orange";
+
+            document.getElementById('output4').innerHTML += car.carMake + "<br>" + car.carModel + "<br>" + car.carYear + "<br>" + car.carColor + "<br><br>";
+            document.getElementById('output4').innerHTML += car.dashboard;
+
+           }
+
+        </script>
+        <style >
+            .inlineDiv{
+                display:inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Object Creation Functions, Inheritance, Properties, Methods, Instantiation</h1>
+        <hr>
+        <a href="#">Schedule</a>
+        <ul>
+            <li><a href="#"></a></li>
+        </ul>
+        <hr>
+        <h3>Object Creation Functions</h3>
+        <ul>
+            <li>
+                <div><h5>Create object Car</h5>
+                    <div id="output1"></div><button onclick="CreateObject()">Start</button></div>
+                </div>
+            </li>
+        </ul>
+        <hr>
+        <h3>Inheritance</h3>
+        <ul>
+            <li>
+                <div><h4>Blue Car inherits from Red Car</h4>
+                    <div id="output2"></div><button onclick="CreateObjectThatInherits()">Start</button>
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        <h3>Properties</h3>
+        <ul>
+            <li>
+                <div><h5>Objects Properties</h5>
+                    <div id="output3"></div><button onclick="Properties()">Start</button>
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        <h3>Methods</h3>
+        <ul>
+            <li>
+                <div><h5>Objects methods</h5>
+                    <div><div id="output4"></div></div>
+                    <button onclick="Methods()">Start</button>
+                    <button onclick="redCar.changeGearUp();">Change gear UP</button>
+                    <button onclick="redCar.changeGearDown();">Change Gear Down</button>
+                    <button onclick="redCar.acellerate();">Gas</button>
+                    <button onclick="redCar.break();">break</button>
+                    <button onclick="redCar.steerLeft();">Left</button>
+                    <button onclick="redCar.steerRight();">Right</button>
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        <h3>Instantiation</h3>
+        <ul>
+            <li>
+                <div><h5>Here is a instatation of our Green truck</h5>
+                    <div><div id="output5"></div></div><button>Start</button>
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        
+
+    </body>
+</html>

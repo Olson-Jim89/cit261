@@ -1,6 +1,63 @@
 <html>
     <head>
         <title>CIT 261: 02 - documentation</title>
+        <script>
+            function runForLoop(){
+
+                var i;
+                for (i = 0; i < 10; i++)
+                {
+                    document.getElementById("output1").innerHTML = i;
+                }
+            } 
+
+            var count = false;
+
+            function runWhileLoop(){
+
+                var i;
+
+                while (count== true)
+                {
+
+                    document.getElementById("output2").innerHTML += i;
+                    i++;
+                }
+            }
+            
+            function startWhile(){
+                if (count == false)
+                    count==true;
+                else if(count == true)
+                    count==false;
+
+                    runWhileLoop();
+            }
+
+            var docount = false;
+
+            function runDoWhileLoop(){
+
+            var i;
+
+            do
+            {
+                document.getElementById("output2").innerHTML += i;
+                i++;
+            }
+            while (docount == true)
+        }
+
+function startDoWhile(){
+    if (docount == false)
+        docount==true;
+    else if(docount == true)
+        docount==false;
+
+        runDoWhileLoop();
+}
+
+        </script>
     </head>
     <body>
         <h1>Loops, Conditional Statements, Functions, Variables, Parameters, Arrays, Associative Arrays</h1>
@@ -9,17 +66,17 @@
         <ul>
             <li><a href="#"></a></li>
         </ul>
-        <h3>Loops</h3>
         <hr>
+        <h3>Loops</h3>
         <ul>
             <li>
                 <div><h5>For loop</h5>
-                    <div id="output1"></div><button>Start</button>
+                    <div id="output1"></div><button onclick="runForLoop()">Start</button>
                 </div>
             </li>
             <li>
                 <div><h5>While loop</h5>
-                        <div id="output2"></div><button>Start</button>
+                        <div id="output2"></div><button onclick="startWhile()">Start</button>
                 </div>
             </li>
             <li>
@@ -28,9 +85,8 @@
                 </div>
             </li>
         </ul>
-
-        <h3>Conditional Statements</h3>
         <hr>
+        <h3>Conditional Statements</h3>
         <ul>
             <li>
                 <div><h5>if Statement</h5>
@@ -49,8 +105,8 @@
             </li>
         </ul>
 
-        <h3>Functions</h3>
         <hr>
+        <h3>Functions</h3>
         <ul>
             <li>
                 <div><h5>Add 5283 to 4837</h5>
@@ -58,8 +114,9 @@
                 </div>
             </li>
         </ul>
-        <h3>Variables</h3>
+
         <hr>
+        <h3>Variables</h3>
         <ul>
             <li>
                 <div><h5>x = y + 1</h5>
@@ -67,8 +124,9 @@
                 </div>
             </li>
         </ul>
-        <h3>Parameter</h3>
+
         <hr>
+        <h3>Parameter</h3>
         <ul>
             <li>
                 <div><h5>Add two numbers</h5>
@@ -77,12 +135,23 @@
             </li>
         </ul>
 
-        <h3>Parameter</h3>
         <hr>
+        <h3>Arrays</h3>
         <ul>
             <li>
-                <div><h5>Add two numbers</h5>
-                    <div><input id="value1" type="text"> + <input id="value2" type="text">=<div id="output10"></div></div><button>Start</button>
+                <div><h5>List of numbers</h5>
+                    <div><div id="output10"></div></div><button>Start</button>
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+        <h3>Assocative Arrays</h3>
+       
+        <ul>
+            <li>
+                <div><h5>List of Prime Numbers</h5>
+                    <div id="output11"></div><button>Start</button>
                 </div>
             </li>
         </ul>
