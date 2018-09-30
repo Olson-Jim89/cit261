@@ -9,6 +9,41 @@
 
     //var alphabet = { "1" :"a","2":"b","3":"c","4":"d","5":"e","6":"f","7":"g","8":"h","9":"i","10":"j","11":"k","12":"l","13":"m",14:"n",15:"o","p","q","r","s","t","u","v","w","x","y","z"};
 
+    var associativeArray = {firstname:"John", lastname:"Smith", age:33, Ocupation:"explorer"}
+
+    function forIn(){
+        for (var x in associativeArray){
+            alert(x);
+        }
+    }
+    
+    function runWhileLoop(){
+
+        var i = 0;
+
+        while (count == true)
+        {
+
+            document.getElementById("output2").innerHTML = i;
+            setTimeout(function(){ i++; }, 3000); 
+        }
+    }
+    
+    function startWhile(){
+        if (count == false){
+             count = true;
+             console.log(count);
+        } 
+        else if(count == true){
+            count = false;
+            console.log(count);
+        }
+            
+
+            runWhileLoop();
+    }
+ 
+
     function sortPrimeNumbers(){
         alert("Sorting Prime Numbers");
         var i;

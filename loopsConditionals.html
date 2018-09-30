@@ -7,7 +7,7 @@
                 var i;
                 for (i = 0; i < 10; i++)
                 {
-                    document.getElementById("output1").innerHTML = i;
+                    document.getElementById("output1").innerHTML += i;
                 }
             } 
 
@@ -15,21 +15,26 @@
 
             function runWhileLoop(){
 
-                var i;
+                var i = 0;
 
-                while (count== true)
+                while (count == true)
                 {
 
-                    document.getElementById("output2").innerHTML += i;
-                    i++;
+                    document.getElementById("output2").innerHTML = i;
+                    setTimeout(function(){ i++; }, 3000); 
                 }
             }
             
             function startWhile(){
-                if (count == false)
-                    count==true;
-                else if(count == true)
-                    count==false;
+                if (count == false){
+                     count = true;
+                     console.log(count);
+                } 
+                else if(count == true){
+                    count = false;
+                    console.log(count);
+                }
+                    
 
                     runWhileLoop();
             }
@@ -42,7 +47,7 @@
 
             do
             {
-                document.getElementById("output2").innerHTML += i;
+                document.getElementById("output2").innerHTML = i;
                 i++;
             }
             while (docount == true)
@@ -50,9 +55,9 @@
 
 function startDoWhile(){
     if (docount == false)
-        docount==true;
+        docount=true;
     else if(docount == true)
-        docount==false;
+        docount=false;
 
         runDoWhileLoop();
 }
