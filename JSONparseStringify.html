@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <script>
+
+            var JSONobject = '{ "firstName":"John", "LastName":"Smith", "age":"42", "salary":"yes", "Amount":"$28,000"}';
+
+            var employee;
+
+            function runJSONparse(){
+                employee = JSON.parse(JSONobject);
+
+                for (var x in employee.value){
+                    document.getElementById("output1").innerHTML += x + "<br>";
+                }
+            }
+
+            function runJSONstringify(){
+                var sendJSON = JSON.stringify(employee);
+
+                document.getElementById("output2").innerHTML = employee;
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h1>JSON Parse and Stringify</h1>
+        <hr>
+        <a href="#">Schedule</a>
+        <ul>
+            <li><a href="#"></a></li>
+        </ul>
+        <hr>
+        <h3>JSON parse</h3>
+        <ul>
+            <li>
+                <div><h5>Parse</h5>
+                    <div id="output1"></div><button onclick="runJSONparse()">Start</button>
+                </div>
+            </li>
+                  </ul>
+        <hr>
+        <h3>JOSN stringify</h3>
+        <ul>
+            <li>
+                <div><h5>Stringify</h5>
+                    <div id="output2"></div><button onclick="runJOSNstrignify()">Start</button>
+                </div>
+            </li>
+        </ul>
+
+       
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <script>
+
+
+            function JSONWebService(){
+                var json = new XMLHttpRequest();
+                json.onreadystatechange=function(){
+                    if (this.readyState == 4 && this.status == 200){
+                        var item = JSON.parse(this.responseText);
+                        document.getElementById("output1").innerHTML = item.title;
+                    }
+                    
+                };
+                json.open("GET",'https://jsonplaceholder.typicode.com/todos/1', true);
+                json.send();
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h1>JSON Parse and Stringify</h1>
+        <hr>
+        <a href="#">Schedule</a>
+        <ul>
+            <li><a href="#"></a></li>
+        </ul>
+        <hr>
+        <h3>JSON parse</h3>
+        <ul>
+            <li>
+                <div><h5>XML HTTP Request JSON Web Service</h5>
+                    <div id="output1"></div><button onclick="JSONWebService()">Start</button>
+                </div>
+            </li>
+                  </ul>
+        <hr>
+       
+    </body>
+</html>
