@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - Documentation</title>
+        <script>
+            let storage = window.localStorage;
+            
+            let pageNum = 1;
+
+          
+            let journalObject = {"page":[{"date":"10/23/2018","entry":"Dear journal..."}]};
+
+            function getCurrentDate(){
+                let today = new Date();
+                document.getElementById('jdate').value = today.toLocaleDateString();
+            } 
+            
+
+            function addToArray(){
+                let date = document.getElementById('jdate').value;
+                let entry = document.getElementById('jentry').value;
+                pageNum = document.getElementById('jPage').value;
+                
+                // journalEntry.date = date;
+               // journalEntry.entry = entry;
+
+               // let NewJournalEntry = new journalEntry();
+
+                //NewJournalEntry.date = date;
+                //NewJournalEntry.entry = entry;
+                document.getElementById('output1').innerHTML = "";
+
+                console.log(journalObject.page[0].entry);
+                
+
+                journalObject.page[pageNum - 1] = {"date":date,"entry":entry};
+                
+
+                console.log(journalObject.page[pageNum - 1].date + " " + journalObject.page[pageNum - 1].entry);
+
+                pageNum++;
+
+                document.getElementById('jPage').value = pageNum;
+
+                for(x in journalObject.page){
+                   let p = journalObject.page[x];
+                    console.log (p);
+                    document.getElementById('output1').innerHTML += p.date + "<br><br>" + p.entry + "<br><br>";
+                }
+
+            }
+            
+            function storeLocal(){
+
+
+               storage.setItem('journal', JSON.stringify(journalObject));
+
+               alert("Saved! ");
+
+            }
+
+            function retrieve(){
+
+                let open = JSON.parse(localStorage.getItem('journal'));
+
+                console.log("it works: " + open.page[1]);
+
+                document.getElementById('output1').innerHTML = "";
+
+                for(x in open.page) {
+                   let p = open.page[x]
+                    document.getElementById('output1').innerHTML += p.date + "<br><br>" + p.entry + "<br><br>";
+                }
+                
+            }
+                      
+        </script>
+    </head>
+    <body onload="getCurrentDate()">
+        <h1>Local Storage API</h1>
+        <hr>
+        <ul>
+            <li>
+                <div><h5>Local Storage API, Storing and Retrieving Simple Data, Arrays, Associative Arrays, and Objects</h5>
+                    <div style="display:inline-block">
+                    PageNumber: <input type="number" id="jPage" value="1">
+                    <br>
+                    Date:<br> 
+                    <input id="jdate" type="text"><br>
+                    Journal Entry: <br>
+                    <textarea id="jentry" rows="10" cols="25" >This is a test</textarea><br>
+                    <button onclick="addToArray()">Add</button>
+                    <button onclick="storeLocal()">Save</button>
+                    <button onclick="retrieve()">Open</button>
+                    </div>
+                    <div id="output1" style="display:inline-block; vertical-align: top; margin-left: 30px"></div>
+                    <div id="output2" style="display:inline-block; vertical-align: top; margin-left: 30px"></div>
+                </div>
+            </li>
+                  </ul>
+        <hr>
+       
+    </body>
+</html>

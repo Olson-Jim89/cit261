@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <style>
+            button{
+                display: block;
+            }
+        </style>
+        <script>
+
+            let count = 0;
+            //let templete = '<div id="box'+count+'"><button onclick="addBefore()">--UP--</button><button onclick="killElement(document.getElementById("box'+count+'"))">--><--</button><button onclick="addElement()">-Down-</button></div>';
+            
+            function fillElement(){
+                let templete = "box "+ count+"<button onclick=\"addBefore(this.parentElement.id)\">--UP--</button><button onclick=\"killElement(\'box" + count.toString() + "\')\">--><--</button><button onclick='addElement()'>-Down-</button>";
+                return templete
+            }
+
+
+            
+            function addElement(){
+
+                let canvas = document.getElementById('output1');
+                let newElement = document.createElement("div");
+                
+                newElement.id = "box" + count.toString() + "";
+
+                newElement.innerHTML = fillElement();
+
+                canvas.appendChild(newElement);
+                count++;
+            
+            } 
+            
+            
+            function addBefore(parentID){
+
+                let canvas = document.getElementById('output1');
+                let root = document.getElementById(parentID);
+                let newElement = document.createElement("div");
+                newElement.id = "box" + count.toString() + "";
+
+                newElement.innerHTML = fillElement();
+
+                
+                canvas.insertBefore(newElement,root);
+                count++
+
+            }
+            
+            function killElement(badElement){
+
+                let canvas = document.getElementById('output1');
+                let delElement = document.getElementById(badElement);
+
+                canvas.removeChild(delElement);
+
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>DOM Manipulation Using createElement, appendChild, insertBefore, removeChild, etc.</h1>
+        <hr>
+        <ul>
+            <li>
+                <div><h5>boxes</h5>
+                    <div id="output1">
+                        +
+                        <div id="box">
+                            <button style="background-color:purple" onclick="addBefore(this.parentElement.id)">--UP--</button>
+                            <button style="background-color:purple" onclick="killElement('box')">--><--</button>
+                            <button style="background-color:purple" onclick="addElement()">-Down-</button>
+                        </div>
+                        +
+                    </div>
+                </div>
+            </li>
+                  </ul>
+        <hr>
+
+       
+    </body>
+</html>
