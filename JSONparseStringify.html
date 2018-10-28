@@ -3,7 +3,7 @@
         <title>CIT 261: 02 - documentation</title>
         <script>
 
-            let JSONobject = {"firstName":"John", "lastName":"Smith", "age":"42", "salary":"yes", "amount":"$28,000"};
+            let JSONobject = '{"firstName":"John", "lastName":"Smith", "age":"42", "salary":"yes", "amount":"$28,000"}';
 
             let employee;
 
@@ -24,9 +24,9 @@
 
                 employee.amount = "$32,000";
 
-                let sendJSON = JSON.stringify(JSONobject);
+                let sendJSON = JSON.stringify(employee);
 
-                document.getElementById("output2").innerHTML = sendJSON;
+                document.getElementById("output2").innerHTML = "Message sent the the server: "+ sendJSON;
             }
             
         </script>
