@@ -3,33 +3,36 @@
         <title>CIT 261: 02 - documentation</title>
         <script>
 
-            var JSONobject = '{ "firstName":"John", "LastName":"Smith", "age":"42", "salary":"yes", "Amount":"$28,000"}';
+            let JSONobject = {"firstName":"John", "lastName":"Smith", "age":"42", "salary":"yes", "amount":"$28,000"};
 
-            var employee;
+            let employee;
 
             function runJSONparse(){
-                employee = JSON.parse(JSONobject);
+                
 
-                for (var x in employee.value){
-                    document.getElementById("output1").innerHTML += x + "<br>";
-                }
+                document.getElementById("output1").innerHTML = "Message form server:" + JSONobject + "<br><br>";
+                
+                employee = JSON.parse(JSONobject);
+                document.getElementById("output1").innerHTML += employee.firstName + " " + employee.lasttName + " is " + employee.age + "is paid a salary of" + employee.amount;
+
             }
 
             function runJSONstringify(){
-                var sendJSON = JSON.stringify(employee);
+                
+                
+                alert("Let us give John a raise, from $28,000 a year to $32,000 a year");
 
-                document.getElementById("output2").innerHTML = employee;
+                employee.amount = "$32,000";
+
+                let sendJSON = JSON.stringify(JSONobject);
+
+                document.getElementById("output2").innerHTML = sendJSON;
             }
             
         </script>
     </head>
     <body>
         <h1>JSON Parse and Stringify</h1>
-        <hr>
-        <a href="#">Schedule</a>
-        <ul>
-            <li><a href="#"></a></li>
-        </ul>
         <hr>
         <h3>JSON parse</h3>
         <ul>
@@ -44,7 +47,7 @@
         <ul>
             <li>
                 <div><h5>Stringify</h5>
-                    <div id="output2"></div><button onclick="runJOSNstrignify()">Start</button>
+                    <div id="output2"></div><button onclick="runJSONstringify()">Start</button>
                 </div>
             </li>
         </ul>
