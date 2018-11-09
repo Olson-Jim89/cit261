@@ -4,13 +4,51 @@
         <style>
             .myStyle{
                 color: blue;
-
+                background-color:orange;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                
+                width: 320px;
+                height:240Px;
+                padding: 20px;
             }
         </style>
         <script>
+            let theme = 0;
 
             function changeCSS(){
-                document.getElementById("output1").style.backgroundColor = "blue";
+                
+                let d = document.getElementById("output1");
+
+                theme ++;
+
+                switch(theme){
+                    case 1:
+                        d.style.backgroundColor = "Black";
+                        d.style.color = "lime";
+                        d.style.fontFamily ="'Courier New', Courier, monospace";
+                    break;
+                    case 2:
+                        d.style.backgroundColor = "blanchedalmond";
+                        d.style.color = "darkblue";
+                        d.style.fontFamily ="'Times New Roman', Times, serif";
+                    break;
+                    case 3:
+                        d.style.backgroundColor = "blanchedalmond";
+                        d.style.color = "darkblue";
+                        d.style.fontFamily ="'Times New Roman', Times, serif";
+                    break;
+                    default:
+                        d.style.backgroundColor = "blue";
+                        d.style.color = "orange";
+                        d.style.fontFamily = "'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif";
+                    break;
+                }
+
+                
+                d.style.backgroundColor = "Black";
+                d.style.color = "lime";
+                d.style.fontFamily ="'Courier New', Courier, monospace";
+
             }
             
         </script>
@@ -20,8 +58,8 @@
         <hr>
         <ul>
             <li>
-                <div><h5>Change Color</h5>
-                    <div id="output1" class="myStyle">Sampletext</div><button onclick="changeCSS()">Start</button>
+                <div><h5>Make Cool</h5>
+                    <div id="output1" class="myStyle">function Javasrcipt(Parameters){ <br> &nbsp;&nbsp;&nbsp; if (expression == true){ <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do cool stuff <br> &nbsp;&nbsp;&nbsp;} <br> }</div><button onclick="changeCSS()">Change through Styles</button>
                 </div>
             </li>
                   </ul>

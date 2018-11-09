@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>the time when 
+        <style>
+            button 
+            {
+                background:none!important;
+                color:inherit;
+                border:none; 
+                padding:0!important;
+                font: inherit;
+                /*border is optional*/
+                border-bottom:1px solid #444; 
+                cursor: pointer;
+            }
+        </style>
+            <script>
+            function ChangeTrack(song){
+
+                        
+                var player = document.getElementById('MusicPlayer');
+                var track = document.getElementById('trackSource');
+                var title = "Now Playing: " + song;
+                              
+                    
+                track.setAttribute("src", song);
+                document.getElementById('NowPlaying').innerHTML = title;
+                player.load();
+                
+            }
+            function setupPage(){
+
+            document.getElementById('NowPlaying').innerHTML = "Now Playing: 0HigherAndHigher.mp3";
+                    
+                                let d = document.getElementById('DrawBoard');
+                                let draw = d.getContext("2d");
+                    
+                                draw.fillStyle = "red";
+                    
+                                draw.fillRect(100,100,300,150);
+                    
+                                  
+            }                  
+             </script> 
+    </head>
+    <body onload="setupPage()">
+        <h1>HTML5 Video, Aduio, and Canvas</h1>
+        <hr>
+        <h3>Video</h3>
+                <div>
+                    <video width="640" height="480" controls>
+                            <source src="Elephant.mp4" type="video/mp4">
+                            Your browser currently dose not support video player
+                    </video>
+                </div>
+        <hr>
+        <h3>Audio</h3>
+                <div>
+                    <div id="NowPlaying"> Now Playing:</div>
+                    <audio id="MusicPlayer"  controls>
+                        <source id="trackSource" src="0HigherAndHigher.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <ul>
+                        <li>
+                            <button onclick="ChangeTrack('0HigherAndHigher.mp3');">
+                                Higher And Higher
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="ChangeTrack('0StillTheSame.mp3');">
+                                Still The Same
+                            </button>    
+                        </li>
+                        <li>
+                            <button onclick="ChangeTrack('0ASummersNightInAfrica.mp3');">
+                                A Summers Night In Africa
+                            </button>
+                        </li>
+                    </ul>
+
+                </div>
+        <h3>Canvas</h3>
+                <div>
+                    <canvas id="DrawBoard" width="640" height="480" style="border:1px solid #000000;">
+                    </canvas>
+                </div>
+      
+    </body>
+</html>

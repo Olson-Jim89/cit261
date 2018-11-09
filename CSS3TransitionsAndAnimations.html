@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <style>
+                #output1{
+                    width:256px;
+                    height:256px;
+                    position: relative;
+                    background-color: red;
+                    z-index: 5;
+                    
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    color: white;
+                    text-align: center;
+                    display: inline-block;
+                   
+                }
+                #output1:hover{
+                    opacity: 0.2;
+                }
+                #hidden{
+                    width:256px;
+                    height:256px;
+                    background-color: blue;
+                    position: relative;
+                    top: -256px;
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    color: white;
+                    text-align: center;
+
+                }
+
+                #output2{
+                    width:256px;
+                    height:64px;
+                    position: relative;
+                    background-color:green;
+                    display: inline-block;
+
+                    animation: grow 4s ease 1s 21 alternate both;
+                }
+
+                @keyframes grow{
+                    from {width: 256px;}
+                    to {width: 1024px;}
+
+                }
+                
+            </style>
+        <script>
+            function reveal(){
+                document.getElementById("output1").style.transition ="opacity 6s";
+            }
+
+        </script>
+    </head>
+    <body>
+        <h1>CSS3 Transitions and Animations</h1>
+        <hr>
+        <h3>Transitions</h3>
+   
+                <div>
+                    <div id="output1" onmouseover="reveal()" ><span>Hover over for six seconds</span></div>
+                    <div id="hidden">Now you see me!</div>
+                </div>
+        <hr>
+        <h3>Animations</h3>
+                <div>
+                    <div id="output2"></div>
+                </div>
+      
+    </body>
+</html>
