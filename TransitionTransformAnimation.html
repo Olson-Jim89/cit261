@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>CIT 261: 02 - documentation</title>
+        <style>
+            .mybutton{
+                background-color: cornflowerblue;
+                width: 100px;
+                height:40px;
+                
+                
+                transition: background-color 1s;
+                
+                border-radius: 7px;
+                color: white;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                vertical-align: middle;
+                border: 0px;
+
+            }
+
+            #textPaddingOutput1{
+                display: inline;
+            }
+
+            .myButton:hover{
+                background-color: darkblue;
+            }
+
+            #output2{
+                margin:auto;
+                background-color: RED;
+                width: 80px;
+                height:60px;              
+                border-radius: 7px;
+                color: white;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                vertical-align: middle;
+                border: 5px;
+            }
+
+            #inputTranslateX, #inputTranslateY, #inputScaleX, #inputScaleY{
+                width: 83px;
+            }
+
+            button{
+                width:70px;
+            }
+
+            .myAnimation{
+                background-color: green;
+                width: 80px;
+                height:60px;              
+                border-radius: 7px;
+                color: white;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                text-align: center;
+                vertical-align: middle;
+                border: 5px;
+                position: relative;
+                animation: backforth 2s ease-in-out 3s infinite alternate;
+
+            }
+
+            @keyframes backforth{
+                from{left: 0px;  transform: rotate(-15deg)}
+                to {left: 750px; transform: rotate(15deg)}
+            }
+            
+
+
+            
+        </style>
+        <script>
+            function applyRotation(){
+
+                let degree = document.getElementById('inputRotate').value;
+
+                document.getElementById("output2").style.transform += "rotate("+degree+"deg)";
+
+            }
+            function applyScale(){
+
+                let x = document.getElementById('inputScaleX').value;
+                let y = document.getElementById('inputScaleY').value;
+                
+                
+                document.getElementById("output2").style.transform += "scale(" + x + "," + y + ")";
+
+            }
+            function applyTranslation(){
+
+                let x = document.getElementById('inputTranslateX').value;
+                let y = document.getElementById('inputTranslateY').value;
+                
+                
+                document.getElementById("output2").style.transform += "translate(" + x + "px, " + y + "px)";
+
+            }              
+        </script>
+    </head>
+    <body>
+        <h1>Designing, Defining, and Triggering CSS3 Transitions, Transforms, and Animations without Custom Libraries</h1>
+        <hr>
+        <h3>Transitions</h3>
+                <div>
+                    <button class="myButton" onclick="">Transition</button>
+                </div>
+
+        <hr>
+        <h3>Transforms</h3>
+
+                <div>
+                    <div id="output2" class="myTransform">Transform</div>
+                    <input id="inputRotate" type="text" placeholder="Degrees"><button onclick="applyRotation()">Rotate</button><br>
+                    <input id="inputScaleX" type="text"placeholder="Scale X"><input id="inputScaleY" type="text"placeholder="Scale Y"><button onclick="applyScale()">Scale</button><br>
+                    <input id="inputTranslateX" type="text" placeholder="Position X"><input id="inputTranslateY" type="text"placeholder="Position Y"><button onclick="applyTranslation()">Translate</button>
+                </div>
+        <hr>
+        <h3>Animations</h3>
+                <div>
+                    <div id="output3" class="myAnimation">Animation</div>
+                </div>
+
+       
+    </body>
+</html>
