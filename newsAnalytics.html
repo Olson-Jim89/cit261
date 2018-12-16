@@ -1,0 +1,303 @@
+<html>
+    <head>
+        <title>Chronicling America Analytics</title>
+        <script>
+
+            let storage = window.localStorage;
+
+            //let topicList = [];
+            let topicList = {"topic":[]};
+
+            let createCount = 0;
+
+            function storeLocal(){
+               storage.setItem('topicList', JSON.stringify(topicList));
+               console.log("stored: "+JSON.stringify(topicList));
+            }
+
+            function retrieve(){
+
+                let open = JSON.parse(localStorage.getItem('topicList'));
+
+               //console.log("it works: " + open.topic[0].topicName);
+
+                
+                for(x in open.topicList) {
+                   topicList.topic[x].topicName = open.topic[x].topicName;
+                   topicList.topic[x].topicCount = open.topic[x].topicCount;
+
+                }
+                
+            }
+
+             function getTweetCount(topicName)
+            {
+                // Count Tweet based on date range and topic
+                let json = new XMLHttpRequest();
+                let tC = 0;
+                json.onreadystatechange = function(tC){
+                    if (this.readyState == 4 && this.status == 200){
+                        let item = JSON.parse(this.responseText);
+                        
+                        tC = parseInt(item.totalItems, 10);
+                        for (let i = 0; i < topicList.topic.length; i++)
+                        {
+                            if (topicList.topic[i].topicName == topicName)
+                            {
+                                topicList.topic[i].topicCount = tC;
+                                
+                                drawGraph();
+                            }
+                        }
+                        storeLocal();
+                     }
+                    
+                };
+                json.open("GET",'https://chroniclingamerica.loc.gov/search/titles/results/?terms='+ topicName +'&format=json&page=5', true);
+                json.send();
+                json.onerror = function(){
+                    topicList.topic.pop();
+                }
+
+               return tC;
+            }
+
+            function topic(name){
+                this.topicName = name;
+                this.topicCount = 0;
+                
+            }
+            
+            function fillElement(topic){
+                let templete = "<h3 id=\"graphLabel" + createCount + "\" class=\"graphLabel\">" + topic.topicName + "</h3><button onclick=\"deleteTopic('"+ topic.topicName.toString() + "')\">X</button><div id=\"" + topic.topicName + "\" class=\"graphBar\" >" + topic.topicCount.toString() + "</div>";
+                return templete
+            }
+
+
+            
+            function addElement(topic){
+
+                let canvas = document.getElementById('barGraphbox');
+                let newElement = document.createElement("div");
+                
+                newElement.className = "topicBlock";
+
+                newElement.innerHTML = fillElement(topic);
+
+                canvas.appendChild(newElement);
+                animateBar(topic);
+
+                createCount++;
+            
+            } 
+
+            function getProportion(topic){
+                let largestTopic = 0;
+                let proportion = 0;
+                for (let i = 1; i < topicList.topic.length; i++){
+                    if (parseInt(topicList.topic[i].topicCount) > largestTopic){
+                        largestTopic = topicList.topic[i].topicCount;
+                        console.log("largest topic: " + largestTopic); 
+                    }
+                }
+
+                    console.log(topicList.topic.length + "proportion: " + proportion);
+                if(topicList.topic.length <= 1)
+                {
+                    proportion = 300;
+                    console.log(topicList.topic.length + "proportion: " + proportion);
+                
+                    return proportion;
+                }
+
+                if(topicList.topic.length >= 2)
+                {
+                    proportion = (topic.topicCount / largestTopic) * 200;
+                    console.log(topicList.topic.length + "proportion: " + proportion);
+                
+                    return proportion;
+                }
+               
+
+            }
+
+            function animateBar(topic){
+                console.log("topic");
+                let bar = document.getElementById(topic.topicName);
+                let width = 0;
+                let id = setInterval(frame, 5);
+
+                let fullWidth = getProportion(topic);
+                console.log("Full Width: " +fullWidth);
+                function frame() {
+                    if (width >= fullWidth) {
+                        clearInterval(id);
+                    } else {
+                        width++;
+                        bar.style.width = width + "px";  
+                    }
+                }
+            }
+
+            function drawGraph(){
+
+                retrieve();
+                let barGraphbox = document.getElementById("barGraphbox");
+
+                console.log("drawGraph");
+
+                barGraphbox.innerHTML = "";
+
+                for (let i = 0; i < topicList.topic.length; i++){
+                    let topic = topicList.topic[i];
+                    addElement(topic);
+                    
+                }
+                
+            }
+
+
+
+            function addTopic(){
+
+                let name = document.getElementById("topic1").value;
+                const uName = name.replace(/^\w/, c => c.toUpperCase());
+                //console.log("addTopic: " + getTweetCount(name));
+
+                if (name != ""){
+
+                   let newTopic = new topic(uName);
+
+                   getTweetCount(uName);
+                   
+                   //alert(newTopic.topicName + newTopic.topicCount);
+
+                   topicList.topic.push(newTopic);
+
+                   document.getElementById("topic1").value = '';
+
+                   
+                }
+            }
+
+            function deleteTopic(topicID){
+                console.log("delete: " + topicID.toString());
+                for (let i = 0; i < topicList.topic.length; i++){
+                    console.log("delete: " + topicID);
+                    if(topicList.topic[i].topicName.toString() == topicID)
+                        topicList.topic.splice(i,1);
+                }
+                drawGraph();
+            }
+
+        </script>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                background-color:darkslategrey;
+            }
+
+            button, input{
+                height: 44px;
+                min-width: 44px;
+                font-family:Arial, Helvetica, sans-serif;
+                font-size: 24pt;
+                border-radius: 5px;
+                margin: 10px
+            }
+            #topic1{
+                width:310px;
+            }
+
+            .graphBox{
+                margin: 10px;
+                border:5px;
+                border-style: solid;
+                border-color:gray;
+                background-color: darkgray;
+                border-radius: 5px;
+                min-width: 480px;
+                min-height: 640px;
+                
+            }
+
+            .graphBar{
+                width: 200px;
+                height:25px;
+                border-style:solid;
+                border-color: black;
+                background-color: cornflowerblue;
+                background-image: linear-gradient(to bottom right,rgb(17, 57, 70), cornflowerblue);
+                color: white;
+                text-align: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                border-radius: 5px;
+                box-shadow: 0px 0px 5px black;
+                /*animation: grow 2s ease-in;*/
+
+            }
+            .graphLabel{
+                min-width: 80px;
+                text-align: right;
+            }
+
+            .topicBlock div,.topicBlock h3, .topicBlock button{
+                display: inline-block;
+            }
+
+            button{
+                transition: background-color 2s;
+                
+            }
+
+            button:hover{
+                background-color: grey;
+            }
+
+            #logo{
+               color: white;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                position: relative;
+                animation: backforth 10s ease-in-out 3s 2 alternate;
+
+            }
+
+            @keyframes backforth{
+                from{left: -400px;  transform: rotate(-5deg)}
+                to {left: 750px; transform: rotate(5deg)}
+            }
+            
+
+        </style>
+    </head>
+ <body onload="retrieve()">
+    <div id="logo">
+    <h1 >Chronicling America Analytics</h1>
+    <h3>Historic Newspaper Pages from 1789-1963</h3>
+    </div>
+    <div class="topicsList">
+        <div><input id="topic1" type="text"><button id="addTopic" onclick="addTopic();">Add Topic</button></div>
+        
+    </div>
+    <div id="barGraphbox" class="graphBox">
+        <div class="topicBlock">
+    </div>
+    <div>
+        <h3 id="howToUse" onclick="expand()">How to Use</h3>
+        <div id="howToUse">
+            <div>Topics to try, any of the united states, fire, Thomas, war, 
+                <ul>
+                    <li>Places</li>
+                    <li>Names</li>
+                    <li>Disasters</li>
+                </ul>
+            </div>
+            <video></video>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
