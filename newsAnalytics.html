@@ -21,13 +21,14 @@
 
                //console.log("it works: " + open.topic[0].topicName);
 
-                
+            if(open != null)
+            {    
                 for(x in open.topicList) {
                    topicList.topic[x].topicName = open.topic[x].topicName;
                    topicList.topic[x].topicCount = open.topic[x].topicCount;
 
                 }
-                
+            }   
             }
 
              function getTweetCount(topicName)
